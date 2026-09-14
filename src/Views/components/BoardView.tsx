@@ -42,18 +42,22 @@ const BoardView: Component<SetViewProps> = (props) => {
 
     
     
-    const lanes = (): Lane[] => [
-        {
-            name: "No " + groupFieldAttribute.displayName(),
-            value: "__NOVALUE__",
-            index: 0,
-        },
-        ...values().map((v,i) => ({
-            name: v,
-            value: v,
-            index: i+1
-        }))
-    ]
+    const lanes = (): Lane[] => {
+        // only show the "No <field>" lane when something actually lacks a value
+        const hasNoValue = (groupedData()["__NOVALUE__"]?.length ?? 0) > 0;
+        return [
+            ...(hasNoValue ? [{
+                name: "No " + groupFieldAttribute.displayName(),
+                value: "__NOVALUE__",
+                index: 0,
+            }] : []),
+            ...values().map((v,i) => ({
+                name: v,
+                value: v,
+                index: i+1
+            }))
+        ];
+    }
  
     const fields = () => definition().fields || props.attributes.map(at => (at.key));
     const attributeDefinition = db.getAttributeDefinition(groupField);

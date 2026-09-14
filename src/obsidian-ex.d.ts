@@ -865,7 +865,7 @@ interface MetadataTypeManager extends Events {
 	/**
 	 * Get assigned widget type for property
 	 */
-	getAssignedType: (property: string) => PropertyWidgetType | null;
+	getAssignedType?: (property: string) => PropertyWidgetType | null;
 	/**
 	 * Get info for property
 	 */

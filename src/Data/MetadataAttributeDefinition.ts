@@ -30,7 +30,7 @@ export class MetadataAttributeDefinition implements AttributeDefinition {
     getPropertyWidget() {
         const key = this._key;
         const propertyInfo = this._app.metadataTypeManager.getPropertyInfo(key);
-        const type = this._app.metadataTypeManager.getAssignedType(key) || propertyInfo?.type;
+        const type = this._app.metadataTypeManager.getAssignedType?.(key) || propertyInfo?.type;
         const widget = this._app.metadataTypeManager.registeredTypeWidgets[type];
         return widget;
     }
@@ -38,7 +38,7 @@ export class MetadataAttributeDefinition implements AttributeDefinition {
     getPropertyInfo() {
         const key = this._key;
         const propertyInfo = app.metadataTypeManager.getPropertyInfo(this._key);
-        const type = app.metadataTypeManager.getAssignedType(key) || propertyInfo?.type;
+        const type = app.metadataTypeManager.getAssignedType?.(key) || propertyInfo?.type;
         return { key, type };
     }
 
